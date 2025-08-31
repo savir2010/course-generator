@@ -1,0 +1,11 @@
+fastapi
+uvicorn
+pydantic
+python-dotenv
+requests
+yt-dlp
+aiohttp
+openai
+typing-extensions
+whisper
+serpapi
