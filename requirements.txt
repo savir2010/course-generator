@@ -7,5 +7,6 @@ yt-dlp
 aiohttp
 openai
 typing-extensions
-whisper
+openai-whisper
 serpapi
+google-search-results

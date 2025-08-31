@@ -1,5 +1,5 @@
 import asyncio
-from serpapi import GoogleSearch
+from serpapi.google_search import GoogleSearch
 from config import Config
 
 class TopicGen:
