@@ -1,58 +1,168 @@
-# Course Generator API
+# Course Generator MCP Server
+
+A Model Context Protocol (MCP) server that provides comprehensive course generation capabilities including course structure creation, video content discovery, quiz generation, transcript processing, and homework assignment creation.
+
+## Features
+
+-  **Course Structure Generation**: Create complete course outlines with sessions and topics
+-  **Video Content Discovery**: Find relevant educational videos for any topic
+-  **Quiz Generation**: Generate timed quizzes with multiple choice and open-ended questions
+-  **Transcript Processing**: Extract transcripts from video URLs
+-  **Homework Generation**: Create assignments based on video transcripts
+-  **Solution Generation**: Generate solutions for coding problems with skeleton code
+
+## Prerequisites
+
+- Python 3.8 or higher
+- Claude Desktop application
+- OpenAI API key
+- SerpAPI key (for web search functionality)
+
 ## Installation
 
-Clone the repository and navigate to the folder.
+### 1. Clone or Download the Project
 
-## Install dependencies:
+```bash
+git clone <your-repository-url>
+cd <project-directory>
+```
+
+### 2. Create Virtual Environment
+
+Create and activate a Python virtual environment in the project directory:
+
+```bash
+# Create virtual environment
+python3 -m venv venv
+
+# Activate virtual environment
+# On macOS/Linux:
+source venv/bin/activate
+
+# On Windows:
+venv\Scripts\activate
+```
+
+### 3. Install Dependencies
+
+Install the required Python packages:
+
+```bash
 pip install -r requirements.txt
+```
 
-## Run the API:
-uvicorn main:app --reload
+### 4. Environment Configuration
 
-## Open Swagger UI at:
-http://127.0.0.1:8000/docs
+Create a `.env` file in the project root directory:
 
-# Endpoints
-## POST /course
+```bash
+touch .env
+```
 
-## Query Parameters:
+Add your API keys to the `.env` file:
 
-title (string) – Title of the course
+```env
+OPENAI_API_KEY=your_openai_api_key_here
+SERPAPI_API_KEY=your_serpapi_key_here
+```
 
-sessions (integer) – Number of sessions
+### 5. Configure Claude Desktop
 
-topics (integer) – Number of topics per session
+#### Step 1: Open Claude Desktop Configuration
 
-## GET /video
+1. Open Claude Desktop application
+2. Go to **Profile Settings** (click your profile icon)
+3. Navigate to **Developer** tab
+4. Click **Edit Config**
 
-## Query Parameters:
+#### Step 2: Update Configuration
 
-topic (string) – Topic title
+Replace the existing configuration with the following (update the paths to match your system):
 
-## POST /quiz
+```json
+{
+  "mcpServers": {
+    "course-generator": {
+      "command": "/path/to/your/project/venv/bin/python",
+      "args": [
+        "/path/to/your/project/course_mcp.py"
+      ],
+      "env": {
+        "PYTHONPATH": "/path/to/your/project"
+      }
+    }
+  }
+}
+```
 
-## Query Parameters:
+**Important**: Replace `/path/to/your/project` with the actual path to your project directory.
 
-title (string) – Video title
+#### Example Configuration:
 
-duration (integer) – Video duration in minutes
+```json
+{
+  "mcpServers": {
+    "course-generator": {
+      "command": "/Users/username/projects/course-generator/venv/bin/python",
+      "args": [
+        "/Users/username/projects/course-generator/course_mcp.py"
+      ],
+      "env": {
+        "PYTHONPATH": "/Users/username/projects/course-generator"
+      }
+    }
+  }
+}
+```
 
-## POST /transcript
+### 6. Restart Claude Desktop
 
-## Query Parameters:
+After saving the configuration:
+1. Close Claude Desktop completely
+2. Reopen Claude Desktop
+3. The MCP server should now be available
 
-url (string) – YouTube video URL
+## Usage
 
-## POST /homework
+Once configured, you can use the following functions in Claude Desktop:
 
-## Query Parameters:
+### Generate Course Structure
+```
+Generate a course on "Introduction to Machine Learning" with 8 sessions and 3 topics per session
+```
 
-transcript (string) – Transcript of the video
+### Find Educational Videos
+```
+Find videos about "neural networks basics"
+```
 
-## POST /solution
+### Create Quizzes
+```
+Generate a 15-minute quiz on "Python fundamentals"
+```
 
-## Query Parameters:
+### Get Video Transcripts
+```
+Get transcript from this video: https://youtube.com/watch?v=example
+```
 
-problem (string) – Homework problem statement
+### Generate Homework
+```
+Create homework assignments based on this transcript: [transcript content]
+```
 
-skeleton (string) – Skeleton code for the problem
+### Generate Solutions
+```
+Generate a solution for this problem: "Create a sorting algorithm" with this skeleton code: [code template]
+```
+
+## Available Functions
+
+| Function | Description | Parameters |
+|----------|-------------|------------|
+| `generate_course` | Creates complete course structure | `title`, `sessions`, `topics` |
+| `find_video` | Searches for educational videos | `topic` |
+| `generate_quiz` | Creates timed quizzes | `title`, `duration` |
+| `get_transcript` | Extracts video transcripts | `url` |
+| `generate_homework` | Creates homework from transcripts | `transcript` |
+| `generate_solution` | Generates code solutions | `problem`, `skeleton` |

@@ -10,3 +10,4 @@ typing-extensions
 openai-whisper
 serpapi
 google-search-results
+mcp>=1.0.0

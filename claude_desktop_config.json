@@ -1,0 +1,14 @@
+{
+    "mcpServers": {
+      "course-generator": {
+        "command": "/Users/savirdillikar/codecircle/full_proccess/venv/bin/python",
+        "args": [
+          "/Users/savirdillikar/codecircle/full_proccess/course_mcp.py"
+        ],
+        "env": {
+          "PYTHONPATH": "/Users/savirdillikar/codecircle/full_proccess"
+        }
+      }
+    }
+  }
+  
